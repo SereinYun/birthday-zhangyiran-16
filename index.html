@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#190f2c">
-  <meta name="description" content="给特别的你，一份写进星空的生日祝福。">
-  <title>给特别的你 · 生日快乐</title>
+  <meta name="description" content="给张奕然，一份写进星空的生日祝福。">
+  <title>给张奕然 · 生日快乐</title>
   <style>
     :root{color-scheme:dark;--board:#243c34;--chalk:#f3ecda;--muted:#b8c4b3;--pink:#edb6af;--yellow:#eada9f;--line:rgba(239,235,215,.23);--hand:"STKaiti","KaiTi","楷体","Kaiti SC",serif;--sans:"Microsoft YaHei","PingFang SC",sans-serif}
     *{box-sizing:border-box}body{margin:0;background:#1a2e27;color:var(--chalk);font-family:var(--sans);font-size:14px}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}button{color:inherit}button:disabled{cursor:default}[hidden]{display:none!important}
@@ -203,8 +203,8 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
     <main>
       <section class="intro" aria-labelledby="headline">
         <p class="eyebrow">A LITTLE BIRTHDAY MOMENT · JUST FOR YOU</p>
-        <div class="to"><small>TO</small><span id="recipient" class="recipient">特别的你</span></div>
-        <h1 id="headline">给特别的你，<br><span class="emphasis">生日快乐</span></h1>
+        <div class="to"><small>TO</small><span id="recipient" class="recipient">张奕然</span></div>
+        <h1 id="headline">给张奕然，<br><span class="emphasis">16岁生日快乐</span></h1>
         <p class="description" id="description">把期待写在黑板上，把温柔藏进每一秒。<br>有一个特别的日子，值得认真等待。</p>
 
         <div class="countdown-wrap">
@@ -331,11 +331,11 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
     // 将 birthday 的空字符串改成例如 '2027-05-20T00:00'，即可固定生日。
     // 保持为空时，使用下一个 10 月 1 日作为可修改的示例日期。
     // 如果浏览器已保存过设置，请在“定制这份祝福”中点“恢复示例”以重读此配置。
-    const BIRTHDAY_AGE = null;
+    const BIRTHDAY_AGE = 16;
     const DEFAULT_CONFIG = {
-      recipient: '特别的你',
+      recipient: '张奕然',
       birthday: '',
-      message: '愿你被晚风拥抱，被星星照亮。新的一岁，继续做喜欢的事，去见想见的人，热烈又自在地生活。'
+      message: '张奕然，愿你被晚风拥抱，被星星照亮。十六岁继续做喜欢的事，去见想见的人，热烈又自在地生活。'
     };
     const EXTRA_WISHES = [
       '愿你新的一岁，有趣、有盼，无灾、无难。',
@@ -344,7 +344,7 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
       '愿蛋糕是甜的，日子是暖的，身边都是爱你的人。',
       '愿你长大一岁，也继续保有小朋友的快乐。'
     ];
-    const STORAGE_KEY = 'little-birthday-template-v3';
+    const STORAGE_KEY = 'birthday-yiran-16-v1';
     const $ = id => document.getElementById(id);
     const pad = number => String(number).padStart(2, '0');
     let config, preview = false, celebrating = false, blown = false;
@@ -515,3 +515,5 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
   </script>
 </body>
 </html>
+
+
