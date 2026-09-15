@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#190f2c">
+  <meta name="description" content="给特别的你，一份写进星空的生日祝福。">
+  <title>给特别的你 · 生日快乐</title>
+  <style>
+    :root{color-scheme:dark;--board:#243c34;--chalk:#f3ecda;--muted:#b8c4b3;--pink:#edb6af;--yellow:#eada9f;--line:rgba(239,235,215,.23);--hand:"STKaiti","KaiTi","楷体","Kaiti SC",serif;--sans:"Microsoft YaHei","PingFang SC",sans-serif}
+    *{box-sizing:border-box}body{margin:0;background:#1a2e27;color:var(--chalk);font-family:var(--sans);font-size:14px}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}button{color:inherit}button:disabled{cursor:default}[hidden]{display:none!important}
+    .board{position:relative;isolation:isolate;min-height:100svh;overflow:hidden;background:radial-gradient(ellipse at 25% 25%,#30483e44,transparent 65%),radial-gradient(ellipse at 80% 80%,#11261c44,transparent 65%),var(--board);padding:38px max(5.4vw,24px) 25px;display:flex;flex-direction:column}
+    .board:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.78' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23fff' filter='url(%23n)' opacity='.7' d='M0 0h180v180H0z'/%3E%3C/svg%3E")}
+    .board:after{content:"";position:absolute;inset:14px;border:1px solid var(--line);border-radius:2px 4px 3px 6px;pointer-events:none;z-index:-1}
+    header,footer{display:flex;align-items:center;justify-content:space-between;gap:16px}header{width:100%;max-width:1280px;margin:auto auto 0}.brand{display:flex;align-items:center;gap:11px;letter-spacing:2px;font-size:13px}.brand svg{width:29px;height:29px;color:var(--yellow)}.header-note{font-family:var(--hand);font-size:18px;color:var(--muted)}
+    .text-button{border:0;background:none;padding:9px 0;color:var(--muted);font-size:12px;letter-spacing:1px}.text-button:hover{color:var(--chalk)}.text-button .arrow{display:inline-block;margin-left:8px;font-size:18px}
+    main{width:100%;max-width:1280px;margin:0 auto;flex:1;display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;padding:64px 0 44px}.intro{position:relative;z-index:1}.eyebrow{font-size:10px;letter-spacing:2.8px;color:var(--muted);margin:0 0 26px}.to{display:inline-flex;gap:13px;align-items:center;color:var(--pink);font-size:15px;margin-bottom:20px;max-width:100%;overflow-wrap:anywhere}.to:before{content:"";width:26px;height:1px;background:var(--pink)}.to small{font-size:10px;letter-spacing:1px}.recipient{font-family:var(--hand);font-size:21px}
+    h1{font-family:var(--hand);font-weight:500;font-size:clamp(40px,4.1vw,62px);line-height:1.36;letter-spacing:1px;margin:0 0 24px;text-shadow:.7px .3px 1px #f3ecda33}.emphasis{color:var(--yellow);position:relative;white-space:nowrap}.emphasis:after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:6px;border-top:2px solid var(--yellow);border-bottom:1px solid #eada9f55;border-radius:50%;transform:rotate(-2deg);opacity:.75}.description{color:var(--muted);line-height:1.9;margin:0;letter-spacing:1px;font-size:13px}
+    .countdown-wrap{margin:32px 0 0}.countdown-caption{display:flex;align-items:center;gap:9px;font-size:11px;color:var(--muted);letter-spacing:1.2px;min-height:18px}.status-dot{height:5px;width:5px;border-radius:50%;background:var(--pink);box-shadow:0 0 10px #edb6af55}.countdown{display:flex;align-items:flex-start;gap:10px;margin:14px 0 18px;font-variant-numeric:tabular-nums}.time{min-width:68px;text-align:center}.time:first-child{min-width:80px}.number{display:block;font-family:Georgia,"Times New Roman",serif;font-size:clamp(49px,5.2vw,73px);line-height:1.1;letter-spacing:1px;font-weight:400}.time:last-child .number{color:var(--pink)}.unit{display:block;margin-top:8px;color:var(--muted);font-size:10px;letter-spacing:2px}.colon{font-family:Georgia,serif;line-height:1.3;font-size:37px;opacity:.35;padding:0 1px}.target{font-size:11px;color:var(--muted);line-height:1.9}.target time{color:var(--chalk);letter-spacing:1px}.sample{opacity:.8;display:inline-block;margin-left:9px;font-size:10px}
+    .actions{display:flex;align-items:center;flex-wrap:wrap;gap:23px;margin-top:29px}.primary{color:#283b33;background:var(--pink);border:1px solid var(--pink);padding:13px 20px;border-radius:3px 6px 3px 5px;font-size:12px;letter-spacing:1px;box-shadow:2px 2px 0 #edb6af33;transition:transform .2s,background .2s}.primary:hover{background:#f5c9c2;transform:translateY(-2px)}.primary span{margin-left:18px}.secondary{background:none;border:0;border-bottom:1px solid #b8c4b34d;padding:9px 0;color:var(--muted);font-size:12px}.secondary:hover{color:var(--chalk);border-color:var(--chalk)}
+    .drawing{position:relative;text-align:center;align-self:center;margin:0 -10px 0 -15px}.cake-button{display:block;width:100%;max-width:535px;margin:auto;border:0;background:none;padding:0;position:relative;transition:transform .3s}.cake-button:hover{transform:rotate(-1deg) translateY(-3px)}.cake-button svg{display:block;width:100%;height:auto;overflow:visible}.chalk-stroke{fill:none;stroke:var(--chalk);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;filter:url(#chalk)}.pink-stroke{stroke:var(--pink)}.yellow-stroke{stroke:var(--yellow)}.mint-stroke{stroke:#b4cebb}.doodle-text{fill:var(--chalk);font-family:"Segoe Print","Comic Sans MS",cursive;font-size:25px;letter-spacing:2px;filter:url(#chalk)}.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flicker 1.25s ease-in-out infinite alternate;transition:opacity .25s}.flame:nth-child(even){animation-delay:-.7s}.blown .flame{opacity:0}.tiny-star{animation:twinkle 4s ease-in-out infinite}.wish-hint{font-family:var(--hand);font-size:17px;color:var(--muted);margin:0;min-height:24px;letter-spacing:1px}.wish-hint span{color:var(--pink)}
+    .wish-strip{max-width:1280px;width:100%;margin:0 auto;border-top:1px solid var(--line);padding:25px 0 23px;display:flex;gap:25px;align-items:center}.wish-label{flex:0 0 auto;color:var(--pink);font-size:10px;letter-spacing:2px}.wish-label span{font-size:21px;vertical-align:-2px;margin-right:8px}.wish-copy{font-family:var(--hand);font-size:21px;line-height:1.55;flex:1;margin:0;overflow-wrap:anywhere;white-space:pre-line;transition:opacity .2s}.next-wish{border:1px solid var(--line);border-radius:50%;width:35px;height:35px;flex-shrink:0;background:none;font-size:18px;color:var(--muted)}.next-wish:hover{border-color:var(--pink);color:var(--pink)}footer{width:100%;max-width:1280px;margin:0 auto;color:var(--muted);font-size:9px;letter-spacing:1.5px;padding-top:8px}footer .love{font-family:var(--hand);font-size:14px;letter-spacing:1px}.chalk-tray{display:flex;gap:7px;align-items:center;opacity:.8}.chalk-tray i{display:block;width:34px;height:6px;border-radius:2px;transform:rotate(-7deg);background:var(--chalk);box-shadow:0 2px 2px #0003}.chalk-tray i:nth-child(2){width:26px;background:var(--pink);transform:rotate(4deg)}.chalk-tray i:nth-child(3){width:23px;background:var(--yellow);transform:rotate(-3deg)}
+    dialog{border:1px solid #b8c4b344;border-radius:12px;color:var(--chalk);background:#283e35;padding:30px;width:min(460px,calc(100% - 32px));box-shadow:0 25px 100px #0007;max-height:calc(100svh - 32px);overflow:auto}dialog::backdrop{background:#0d201bcc;backdrop-filter:blur(6px)}.dialog-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.dialog-heading h2{font-family:var(--hand);font-size:29px;font-weight:400;margin:0;color:var(--yellow)}.close{border:0;background:none;color:var(--muted);font-size:25px;padding:0 5px}.form-intro{color:var(--muted);font-size:12px;line-height:1.8;margin:0 0 23px}label{display:block;font-size:12px;letter-spacing:1px;margin:19px 0 9px}input,textarea{display:block;width:100%;background:#1e332b;border:1px solid #b8c4b355;border-radius:5px;color:var(--chalk);padding:11px 12px;font-size:14px}textarea{resize:vertical;min-height:86px;line-height:1.7}input:focus,textarea:focus{border-color:var(--yellow)}.help{font-size:11px;line-height:1.8;color:var(--muted);margin:8px 0 0}.form-bottom{display:flex;align-items:center;justify-content:space-between;margin-top:24px;gap:16px}.form-error{font-size:12px;color:var(--pink);line-height:1.6}.toast{position:fixed;left:50%;bottom:32px;transform:translateX(-50%);background:var(--chalk);color:#263c32;padding:13px 23px;z-index:10;border-radius:7px;box-shadow:0 6px 24px #0003;font-size:13px;text-align:center;width:max-content;max-width:calc(100% - 40px)}.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:4}.confetti i{position:absolute;left:var(--x);top:-30px;width:6px;height:11px;background:var(--color);opacity:0;border-radius:1px;animation:fall var(--duration) var(--delay) ease-in forwards}.celebrating .countdown-caption{color:var(--pink)}.celebrating .status-dot{background:var(--yellow)}
+    @keyframes flicker{0%{transform:rotate(-5deg) scale(.94,1)}100%{transform:rotate(6deg) scale(1.04,.92)}}@keyframes twinkle{0%,100%{opacity:.4}50%{opacity:1}}@keyframes fall{0%{opacity:0;transform:translateY(0) rotate(0)}8%{opacity:.85}90%{opacity:.85}100%{opacity:0;transform:translateY(105vh) rotate(510deg)}}
+    @media(min-width:1500px){main{padding:80px 0 60px}.board{padding-top:46px;padding-bottom:35px}}@media(max-width:1000px){main{gap:10px}.board{padding-left:5vw;padding-right:5vw}h1{font-size:42px}.number{font-size:56px}.time{min-width:56px}.time:first-child{min-width:65px}.countdown{gap:7px}.colon{font-size:31px}.drawing{margin-right:-15px}.header-note{font-size:16px}}
+    @media(max-width:740px){.board{padding:30px 29px 27px}.board:after{inset:10px}.header-note{display:none}.brand{font-size:11px;letter-spacing:1px}.brand svg{width:24px;height:24px}.text-button{font-size:11px}main{grid-template-columns:1fr;padding:40px 0 23px;gap:15px}.intro{text-align:center}.eyebrow{font-size:8px;letter-spacing:2px;margin-bottom:24px}.to{margin-bottom:14px}h1{font-size:clamp(35px,7.8vw,49px);line-height:1.42;margin-bottom:20px}.description{font-size:12px}.countdown-wrap{margin-top:26px}.countdown-caption,.countdown,.actions{justify-content:center}.number{font-size:clamp(43px,11vw,62px)}.time{min-width:47px}.time:first-child{min-width:56px}.countdown{gap:7px;margin-bottom:15px}.colon{font-size:29px}.unit{font-size:9px}.actions{margin-top:24px;gap:20px}.primary{padding:12px 16px}.drawing{width:100%;max-width:450px;justify-self:center;margin:0}.cake-button{max-width:365px}.wish-hint{font-size:16px;margin-top:-8px}.wish-strip{padding:22px 0;gap:15px;flex-wrap:wrap}.wish-label{width:100%;font-size:9px}.wish-copy{font-size:19px}.next-wish{width:31px;height:31px}.chalk-tray{display:none}footer{font-size:8px;gap:8px;letter-spacing:1px}footer .love{font-size:12px}.sample{display:block;margin:2px 0 0}.target{font-size:10px}dialog{padding:24px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.confetti{display:none}}
+  </style>
+<style id="dreamy-theme">
+/* Dreamy 16th birthday theme — append after the page's inline styles. */
+:root {
+  color-scheme: dark;
+  --board: #10091f;
+  --chalk: #fff3fb;
+  --muted: #c4b6d7;
+  --pink: #f2a6c9;
+  --yellow: #ffd9a3;
+  --line: rgba(255, 224, 244, .18);
+  --hand: Georgia, "Times New Roman", "Songti SC", serif;
+  --sans: "Microsoft YaHei", "PingFang SC", sans-serif;
+}
+
+html, body { min-width: 0; background: #10091f; }
+body { color: var(--chalk); font-family: var(--sans); overflow-x: hidden; }
+
+.board {
+  min-height: 100svh;
+  padding: clamp(20px, 4vw, 42px) clamp(18px, 5.4vw, 74px) 22px;
+  background:
+    radial-gradient(ellipse 75% 52% at 12% 8%, rgba(116, 57, 157, .42), transparent 72%),
+    radial-gradient(ellipse 72% 58% at 92% 88%, rgba(52, 34, 112, .58), transparent 70%),
+    linear-gradient(145deg, #10091f 0%, #18102e 48%, #0d0a1b 100%);
+}
+.board::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1; opacity: .82; pointer-events: none;
+  background:
+    radial-gradient(circle at 7% 23%, rgba(255,255,255,.75) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 18% 76%, rgba(242,166,201,.68) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 29% 14%, rgba(255,217,163,.66) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 43% 66%, rgba(255,255,255,.5) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 57% 20%, rgba(255,217,163,.62) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 71% 81%, rgba(255,255,255,.55) 0 1px, transparent 1.7px),
+    radial-gradient(circle at 83% 33%, rgba(242,166,201,.65) 0 1px, transparent 1.5px),
+    radial-gradient(circle at 94% 12%, rgba(255,255,255,.62) 0 1px, transparent 1.5px);
+  background-size: 390px 430px;
+  animation: star-drift 18s ease-in-out infinite alternate;
+}
+.board::after { content: ""; position: absolute; inset: 0; z-index: -1; border: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 44%, transparent 30%, rgba(5, 2, 16, .4) 100%); }
+
+header, footer { max-width: 1280px; }
+header { padding-bottom: 8px; }
+.brand { color: #ffeaf5; letter-spacing: 2.5px; font-size: 12px; }
+.brand svg { color: var(--yellow); filter: drop-shadow(0 0 8px rgba(255, 217, 163, .65)); }
+.header-note { color: #d9c9e5; font-family: var(--sans); font-size: 12px; letter-spacing: .5px; }
+.birthday-tag { color: var(--yellow); font-size: 10px; letter-spacing: 3px; text-shadow: 0 0 16px rgba(255, 217, 163, .7); }
+.text-button { color: #d5c7e1; }
+.text-button:hover { color: #fff3fb; }
+
+main { grid-template-columns: 1.03fr .97fr; gap: clamp(24px, 5vw, 72px); padding: clamp(44px, 7vw, 84px) 0 48px; }
+.eyebrow { color: #cfb9e4; letter-spacing: 3.5px; font-size: 9px; }
+.to { color: var(--pink); }
+.to::before { background: linear-gradient(90deg, transparent, var(--pink)); }
+.recipient { font-family: var(--sans); font-size: 17px; letter-spacing: 1px; }
+h1 { color: #fff7fc; font-family: Georgia, "Times New Roman", "Songti SC", serif; font-weight: 400; font-size: clamp(37px, 4.8vw, 66px); letter-spacing: .5px; line-height: 1.25; text-shadow: 0 0 28px rgba(241, 160, 207, .22); }
+.emphasis { color: var(--pink); text-shadow: 0 0 20px rgba(242, 166, 201, .5); }
+.emphasis::after { height: 3px; bottom: -8px; border: 0; background: linear-gradient(90deg, transparent, var(--yellow), transparent); opacity: .8; }
+.description { color: #cfc1dc; letter-spacing: .6px; line-height: 1.95; }
+
+.countdown-wrap { margin-top: 36px; }
+.countdown-caption { color: #d0c0dc; }
+.status-dot { background: var(--pink); box-shadow: 0 0 13px rgba(242, 166, 201, .9); }
+.countdown { gap: clamp(5px, 1.2vw, 12px); }
+.time, .time:first-child { min-width: clamp(56px, 7vw, 82px); }
+.number { color: #fff0f8; font-family: Georgia, serif; text-shadow: 0 0 18px rgba(242, 166, 201, .25); }
+.time:last-child .number { color: var(--pink); }
+.unit, .target { color: #bcaecc; }
+.target time { color: #eee1f1; }
+.colon { color: var(--pink); opacity: .52; }
+
+.actions { gap: 15px 22px; }
+.primary { color: #28132e; background: linear-gradient(135deg, #f5b7d3, #ffd2a5); border: 0; border-radius: 999px; box-shadow: 0 8px 24px rgba(236, 137, 188, .24); }
+.primary:hover { background: linear-gradient(135deg, #ffd2e4, #ffe3bd); transform: translateY(-2px); }
+.secondary { color: #cfc0dc; border-color: rgba(231, 207, 232, .3); }
+.secondary:hover { color: #fff3fb; border-color: var(--pink); }
+
+.drawing { margin: 0; isolation: isolate; }
+.drawing::before { content: ""; position: absolute; z-index: -1; inset: 17% 7% 14%; border-radius: 50%; background: radial-gradient(ellipse, rgba(197, 103, 194, .3), rgba(112, 64, 164, .1) 44%, transparent 70%); filter: blur(14px); }
+.birthday-age { position: absolute; z-index: 0; inset: 6% 0 auto; color: rgba(244, 191, 229, .08); font: 700 clamp(150px, 28vw, 280px)/.8 Georgia, serif; letter-spacing: -14px; pointer-events: none; text-align: center; text-shadow: 0 0 70px rgba(220, 120, 221, .18); }
+.cake-button { z-index: 1; max-width: 530px; filter: drop-shadow(0 17px 25px rgba(8, 2, 22, .3)); }
+.cake-button:hover { filter: drop-shadow(0 20px 30px rgba(242, 166, 201, .25)); }
+.chalk-stroke { stroke: var(--chalk); filter: drop-shadow(0 0 3px rgba(255, 237, 250, .7)); }
+.pink-stroke { stroke: var(--pink); filter: drop-shadow(0 0 5px rgba(242, 166, 201, .85)); }
+.yellow-stroke { stroke: var(--yellow); filter: drop-shadow(0 0 5px rgba(255, 217, 163, .8)); }
+.mint-stroke { stroke: #c9b9f8; filter: drop-shadow(0 0 4px rgba(201, 185, 248, .6)); }
+.doodle-text { fill: var(--pink); font-family: Georgia, serif; filter: drop-shadow(0 0 5px rgba(242, 166, 201, .7)); }
+.flame { filter: drop-shadow(0 0 8px rgba(255, 217, 163, .95)); }
+.wish-hint { color: #c5b4d6; font-family: var(--sans); font-size: 13px; }
+.wish-hint span { color: var(--pink); }
+
+.wish-strip { border-top-color: rgba(255, 226, 243, .18); padding-top: 23px; }
+.wish-label { color: var(--pink); }
+.wish-copy { color: #f1e4f1; font-family: Georgia, "Songti SC", serif; font-size: 19px; }
+.next-wish { border-color: rgba(242, 166, 201, .35); color: #cfb9dc; }
+.next-wish:hover { border-color: var(--pink); color: var(--pink); box-shadow: 0 0 15px rgba(242, 166, 201, .3); }
+footer { color: #9d8eaf; }
+footer .love { color: #d9c5df; font-family: var(--sans); font-size: 12px; }
+.chalk-tray { display: none; }
+
+/* Birthday mode: make the celebration spacious and let the new 16 mark lead. */
+.celebrating main { padding-top: clamp(32px, 5vw, 58px); }
+.celebrating .countdown { display: none; }
+.celebrating .countdown-wrap { margin-top: 27px; }
+.celebrating .target { opacity: .66; }
+.celebrating .birthday-age { color: rgba(247, 182, 221, .11); transform: scale(1.06); }
+.celebrating .cake-button { animation: cake-breathe 4s ease-in-out infinite; }
+
+dialog { color: var(--chalk); background: #211534; border-color: rgba(242, 166, 201, .35); box-shadow: 0 25px 100px rgba(7, 2, 18, .78), 0 0 45px rgba(182, 89, 185, .18); }
+dialog::backdrop { background: rgba(10, 4, 24, .78); backdrop-filter: blur(9px); }
+.dialog-heading h2 { color: var(--yellow); font-family: Georgia, "Songti SC", serif; }
+input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(216, 180, 221, .3); }
+.toast { color: #28132e; background: #fff0f8; box-shadow: 0 8px 30px rgba(6, 2, 17, .4); }
+.confetti { z-index: 4; pointer-events: none; }
+
+@keyframes star-drift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(0, -7px, 0); } }
+@keyframes cake-breathe { 50% { transform: translateY(-3px) scale(1.008); } }
+
+@media (max-width: 760px) {
+  header { gap: 10px; }
+  .header-note { display: none; }
+  main { display: flex; flex-direction: column; align-items: stretch; gap: 26px; padding: 45px 0 30px; }
+  .intro { order: 1; }
+  .drawing { order: 2; margin: 0; }
+  .drawing::before { inset: 8% 4% 8%; }
+  .cake-button { width: min(100%, 430px); }
+  .wish-strip { gap: 13px; align-items: flex-start; }
+  .wish-copy { font-size: 17px; }
+  .wish-label { line-height: 1.5; }
+  footer > span:first-child { display: none; }
+}
+@media (max-width: 370px) {
+  .board { padding-left: 14px; padding-right: 14px; }
+  h1 { font-size: 35px; }
+  .countdown { gap: 2px; }
+  .time, .time:first-child { min-width: 52px; }
+  .number { font-size: 44px; }
+  .colon { font-size: 30px; }
+  .unit { letter-spacing: 1px; font-size: 9px; }
+  .actions { gap: 11px 16px; }
+  .primary { padding: 12px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}
+
+/* 气球与彩带：只播放一轮，层不拦截触摸，重复点击会重新开始。 */
+.balloons{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.balloon{position:absolute;bottom:-160px;left:var(--x);width:var(--size);height:calc(var(--size)*1.25);border-radius:49% 51% 48% 48%;opacity:0;background:radial-gradient(ellipse at 29% 23%,#ffffffc9 0%,#ffffff35 15%,transparent 40%),radial-gradient(ellipse at 70% 80%,#0000002e,transparent 60%),var(--balloon-color);box-shadow:inset -5px -5px 15px #50163d33,0 0 20px #d6a5f514;animation:balloon-rise var(--duration) var(--delay) linear forwards;will-change:transform}
+.balloon:before{content:"";position:absolute;bottom:-6px;left:calc(50% - 4px);width:8px;height:8px;background:var(--balloon-color);clip-path:polygon(50% 0,100% 100%,0 100%)}
+.balloon:after{content:"";position:absolute;left:50%;top:calc(100% + 6px);height:78px;width:15px;border-left:1px solid #eee0ff77;border-radius:50%;transform:rotate(8deg)}
+.confetti i{width:var(--w,6px);height:var(--h,14px);box-shadow:0 0 5px #fff1;animation-name:ribbon-fall;animation-timing-function:linear;will-change:transform}
+.confetti i:nth-child(3n){border-radius:1px 5px 3px 7px;background:linear-gradient(100deg,var(--color),#fff6,var(--color));opacity:.9}
+.confetti i:nth-child(5n){border-radius:50%;height:var(--w,6px)}
+.wish-pop{position:absolute;z-index:3;left:50%;top:47%;transform:translate(-50%,-50%) scale(.7);padding:9px 16px;border:1px solid #ffd9a399;border-radius:999px;color:#fff4e7;background:#5b376cb8;box-shadow:0 0 26px #f2a6c977;font:13px/1 var(--sans);letter-spacing:1px;white-space:nowrap;pointer-events:none;animation:wish-pop .45s cubic-bezier(.2,.9,.3,1.2) forwards}
+.wish-pop[hidden]{display:none}
+.cake-button.wish-revealed{animation:cake-wish .75s cubic-bezier(.2,.8,.2,1)}
+@keyframes balloon-rise{0%{opacity:0;transform:translate3d(0,0,0) rotate(-9deg)}10%{opacity:.91}100%{opacity:0;transform:translate3d(var(--drift),calc(-100vh - 250px),0) rotate(-6deg)}}
+@keyframes ribbon-fall{0%{opacity:0;transform:translate3d(0,0,0) rotate(0)}10%{opacity:.92}100%{opacity:0;transform:translate3d(var(--drift),calc(100vh + 50px),0) rotate(var(--spin))}}
+@keyframes wish-pop{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+@keyframes cake-wish{35%{transform:scale(1.035) rotate(-1.2deg)}70%{transform:scale(.99) rotate(.8deg)}}
+@media(prefers-reduced-motion:reduce){.balloons,.confetti{display:none}}
+
+</style>
+</head>
+<body>
+  <div class="board" id="board">
+    <header>
+      <div class="brand"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m16 3 3.6 9.5L29 15l-8.4 5.3.7 9.7-8-6-9 3 3.3-9.2L2 10l10 .3Z"/></svg><span class="birthday-tag">A LITTLE BIRTHDAY MOMENT</span></div>
+      <span class="header-note">这一刻，星河为你闪耀。</span>
+      <span class="header-note">A DAY WORTH REMEMBERING ✦</span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="headline">
+        <p class="eyebrow">A LITTLE BIRTHDAY MOMENT · JUST FOR YOU</p>
+        <div class="to"><small>TO</small><span id="recipient" class="recipient">特别的你</span></div>
+        <h1 id="headline">给特别的你，<br><span class="emphasis">生日快乐</span></h1>
+        <p class="description" id="description">把期待写在黑板上，把温柔藏进每一秒。<br>有一个特别的日子，值得认真等待。</p>
+
+        <div class="countdown-wrap">
+          <div class="countdown-caption"><span class="status-dot" aria-hidden="true"></span><span id="countdown-caption">距离你的生日，还有</span></div>
+          <div class="countdown" role="timer" aria-label="距离生日的剩余时间" aria-live="off">
+            <div class="time"><span class="number" id="days">00</span><span class="unit">天 DAYS</span></div><span class="colon" aria-hidden="true">:</span>
+            <div class="time"><span class="number" id="hours">00</span><span class="unit">时 HRS</span></div><span class="colon" aria-hidden="true">:</span>
+            <div class="time"><span class="number" id="minutes">00</span><span class="unit">分 MIN</span></div><span class="colon" aria-hidden="true">:</span>
+            <div class="time"><span class="number" id="seconds">00</span><span class="unit">秒 SEC</span></div>
+          </div>
+          <div class="target">约定的日子 · <time id="target-time"></time><span class="sample" id="sample-note">示例日期 · 可以修改</span></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="primary" id="party-button">点我，开启生日派对 ✧</button>
+          <button type="button" class="secondary" id="share-button">分享这份祝福</button>
+        </div>
+      </section>
+
+      <figure class="drawing">
+        <div class="birthday-age" aria-hidden="true"></div>
+        <button type="button" class="cake-button" id="cake-button" aria-label="点击蛋糕，吹灭蜡烛许个愿">
+          <!-- 内嵌 SVG 粉笔画：不依赖外部图片，断网也能显示。 -->
+          <svg viewBox="0 0 520 530" role="img" aria-labelledby="cake-title">
+            <title id="cake-title">粉笔画的双层生日蛋糕，五支蜡烛正在闪烁</title>
+            <defs>
+              <filter id="chalk" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".075" numOctaves="3" seed="8" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.4" xChannelSelector="R" yChannelSelector="G"/></filter>
+              <path id="birthday-curve" d="M90 120 Q255 26 431 115"/>
+            </defs>
+            <text class="doodle-text" font-size="25"><textPath href="#birthday-curve" startOffset="50%" text-anchor="middle">HAPPY BIRTHDAY</textPath></text>
+            <g class="chalk-stroke" opacity=".9">
+              <path d="M114 128q143-73 297-4" stroke-width="1.2" stroke-dasharray="3 8"/>
+              <path class="yellow-stroke tiny-star" d="m70 172 5-17 6 17 17 5-17 6-6 17-5-17-17-6Z"/>
+              <path class="pink-stroke" d="M427 158c-8-17-28-1-9 14l8 7 13-17c9-15-11-24-12-4Z" transform="rotate(15 426 165)"/>
+              <path class="yellow-stroke" d="m451 287 4-12 4 12 12 4-12 4-4 12-4-12-12-4Z"/>
+              <path class="pink-stroke" d="m86 323-8 13m-7-25-14 1m40 35-1 13M419 373l12 13m4-32 16 3m-39 32 2 12"/>
+              <path class="mint-stroke" d="M98 240q-25-23-27-3t-19 5m390-10q18-10 19 4t18-1"/>
+              <path class="yellow-stroke tiny-star" d="M338 140v10m-5-5h10M125 396v10m-5-5h10M380 424v10m-5-5h10"/>
+              <circle cx="121" cy="202" r="2"/><circle cx="402" cy="223" r="2" class="pink-stroke"/><circle cx="73" cy="287" r="2" class="yellow-stroke"/><circle cx="455" cy="332" r="2"/><circle cx="153" cy="158" r="2" class="pink-stroke"/>
+              <!-- 底层蛋糕、糖霜和托盘 -->
+              <path d="M124 318v64c2 34 272 34 273 0v-64"/>
+              <ellipse cx="260" cy="319" rx="136" ry="28"/>
+              <path d="M125 320c8 16 16 7 22 19s17 17 23 3 16-6 21 8 20 18 26 0 18-2 25 11 20 14 26-1 20-18 28-3 20 11 23-3 22-15 27-4 19 7 23-8 18-13 28-23"/>
+              <path class="pink-stroke" d="M132 372c53 24 202 31 256 1m-255 9c60 29 205 29 253 0" stroke-width="3.3"/>
+              <path d="M132 391c-58 1-38 31 128 34 158 0 198-27 131-34m-292 13 4 10c49 34 268 32 316-1l4-9"/>
+              <path d="M199 435q62 8 123 0" opacity=".45" stroke-width="1.5"/>
+              <!-- 上层蛋糕 -->
+              <path d="M164 252v57c6 31 191 31 194 0v-57"/>
+              <ellipse cx="261" cy="252" rx="97" ry="23"/>
+              <path d="M165 252c11 4 12 17 24 12s16-4 20 10 16 18 23 2 19-10 25 1 18 19 25 0 16-13 24-5 20 11 25-3 20 1 26-16"/>
+              <path class="pink-stroke" d="M172 302q86 35 178 2" stroke-width="3.1"/>
+              <path class="yellow-stroke" d="m192 286 4 4m24 4-2 5m34-11 5 3m29 7 4-5m29-10 4 4m-167 71 5 3m21 7 1 5m34-4 4 4m30-8-2 6m38-5 3 5m32-7 4-3m25-6 2 4m22-17 4 2" stroke-width="2.8"/>
+              <!-- 蜡烛 -->
+              <path class="pink-stroke" d="m192 243-3-42 11-1 3 46m-12-34 9 4m-8 8 10 4m-8 8 9 3"/>
+              <path class="mint-stroke" d="m225 243 1-57 11 1-1 60m-9-48 8 5m-9 9 8 5m-9 9 8 4"/>
+              <path class="yellow-stroke" d="m257 246-1-67h12l1 66m-12-52 10 5m-10 11 10 4m-10 11 10 4"/>
+              <path class="pink-stroke" d="m291 246 2-54 11 1-3 51m-8-38 9 5m-9 8 9 5m-9 8 9 5"/>
+              <path class="mint-stroke" d="m324 243 3-40 10 1-2 37m-8-27 9 4m-10 7 10 5"/>
+              <path d="m194 200-1-5m39-9v-5m30-2v-6m37 19v-5m33 16 1-6" stroke-width="1.5"/>
+            </g>
+            <!-- 火焰单独分组，点击蛋糕后熄灭。 -->
+            <g fill="#eada9f" stroke="#eada9f" stroke-width="1" filter="url(#chalk)">
+              <path class="flame" d="M193 193c-13-3-5-17 0-24 0 9 13 20 0 24Z"/>
+              <path class="flame" d="M231 179c-12-3-4-17 1-24-1 9 12 20-1 24Z"/>
+              <path class="flame" d="M262 171c-13-3-5-18 0-27 0 11 14 23 0 27Z"/>
+              <path class="flame" d="M299 184c-12-3-4-17 1-24-1 10 12 21-1 24Z"/>
+              <path class="flame" d="M333 196c-12-3-4-17 1-24-1 10 12 21-1 24Z"/>
+            </g>
+            <g class="chalk-stroke" opacity=".6" stroke-width="1.7"><path d="M336 465q59 16 73-31m-9 4 10-7 2 12"/><path d="M116 464q18 9 37 4" class="pink-stroke"/></g>
+            <text x="174" y="484" class="doodle-text" style="font-size:25px;fill:var(--pink);letter-spacing:1px" transform="rotate(-5 250 470)">make a wish</text>
+          </svg>
+        </button>
+        <div class="wish-pop" id="wish-pop" hidden>愿望已收到 ✦</div>
+        <figcaption class="wish-hint" id="wish-hint">轻轻点击蛋糕，<span>许一个愿吧。</span></figcaption>
+      </figure>
+    </main>
+
+    <aside class="wish-strip" aria-label="送给你的祝福">
+      <div class="wish-label"><span aria-hidden="true">✧</span>写给你的话</div>
+      <p class="wish-copy" id="wish-copy" aria-live="polite">十六岁，是风开始有方向的年纪。愿你眼里有星辰，心里有热爱，奔赴的每一天都闪闪发光。</p>
+      <button type="button" class="next-wish" id="next-wish" aria-label="换一句祝福" title="换一句祝福">↻</button>
+    </aside>
+    <footer><span>MADE OF LITTLE WISHES & BIG LOVE</span><div class="chalk-tray" aria-hidden="true"><i></i><i></i><i></i></div><span class="love">愿每一岁，都奔赴热爱 ♡</span></footer>
+  </div>
+
+  <dialog id="share-dialog" aria-labelledby="share-title">
+    <div class="dialog-heading"><h2 id="share-title">把心意送给 TA</h2><button type="button" class="close" id="close-share" aria-label="关闭分享">×</button></div>
+    <p class="form-intro">复制下面的链接，发到微信聊天里。<br>对方点开后，就能看到这份星空生日祝福。</p>
+    <label for="share-link">专属祝福链接</label>
+    <textarea id="share-link" readonly rows="4"></textarea>
+    <p class="help">如果微信限制了自动复制，可以长按链接选择“全选”和“复制”。</p>
+    <div class="form-bottom"><span class="help" id="copy-status" role="status"></span><button type="button" class="primary" id="copy-link">复制链接 ↗</button></div>
+  </dialog>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <div class="balloons" id="balloons" aria-hidden="true"></div>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <noscript><p style="padding:20px;text-align:center">请启用浏览器 JavaScript，以使用生日倒计时和祝福互动。</p></noscript>
+
+  <script id="countdown-core">
+    // 时间计算独立于页面：用实际时间差，避免后台休眠后累计误差。
+    const BirthdayClock = {
+      parseLocal(value) {
+        if (typeof value !== 'string') return null;
+        const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(value);
+        if (!match) return null;
+        const [, year, month, day, hour, minute] = match.map(Number);
+        if (year < 1900 || year > 9999) return null;
+        const date = new Date(year, month - 1, day, hour, minute);
+        // 拒绝 2 月 30 日等会被 Date 自动纠正的输入。
+        return date.getFullYear() === year && date.getMonth() === month - 1 &&
+          date.getDate() === day && date.getHours() === hour && date.getMinutes() === minute
+          ? date.getTime() : null;
+      },
+      remaining(target, now) {
+        const total = Math.max(0, Math.ceil((target - now) / 1000));
+        return {days: Math.floor(total / 86400), hours: Math.floor(total / 3600) % 24,
+          minutes: Math.floor(total / 60) % 60, seconds: total % 60, done: target <= now};
+      }
+    };
+  </script>
+  <script>
+    'use strict';
+    // ===== 最常修改的地方 =====
+    // recipient：名字；birthday：本地时间 YYYY-MM-DDTHH:mm；message：祝福语。
+    // 将 birthday 的空字符串改成例如 '2027-05-20T00:00'，即可固定生日。
+    // 保持为空时，使用下一个 10 月 1 日作为可修改的示例日期。
+    // 如果浏览器已保存过设置，请在“定制这份祝福”中点“恢复示例”以重读此配置。
+    const BIRTHDAY_AGE = null;
+    const DEFAULT_CONFIG = {
+      recipient: '特别的你',
+      birthday: '',
+      message: '愿你被晚风拥抱，被星星照亮。新的一岁，继续做喜欢的事，去见想见的人，热烈又自在地生活。'
+    };
+    const EXTRA_WISHES = [
+      '愿你新的一岁，有趣、有盼，无灾、无难。',
+      '愿你一直拥有，重新出发的勇气和被生活偏爱的运气。',
+      '愿你可以做自己的太阳，无需凭借谁的光。',
+      '愿蛋糕是甜的，日子是暖的，身边都是爱你的人。',
+      '愿你长大一岁，也继续保有小朋友的快乐。'
+    ];
+    const STORAGE_KEY = 'little-birthday-template-v3';
+    const $ = id => document.getElementById(id);
+    const pad = number => String(number).padStart(2, '0');
+    let config, preview = false, celebrating = false, blown = false;
+    let tickTimer, toastTimer, confettiTimer, balloonTimer, wishIndex = 0;
+
+    function defaults() {
+      const now = new Date();
+      let year = now.getFullYear();
+      if (new Date(year, 9, 1) < now) year++;
+      const fixedDate = BirthdayClock.parseLocal(DEFAULT_CONFIG.birthday);
+      return {...DEFAULT_CONFIG, birthday: fixedDate !== null ? DEFAULT_CONFIG.birthday : `${year}-10-01T00:00`, customized: fixedDate !== null};
+    }
+    function validConfig(value) {
+      return value && typeof value.recipient === 'string' && value.recipient.trim().length > 0 &&
+        value.recipient.length <= 24 && typeof value.message === 'string' &&
+        value.message.trim().length > 0 && value.message.length <= 160 && BirthdayClock.parseLocal(value.birthday) !== null;
+    }
+    function readConfig() {
+      // 分享设定放在链接中，对方无需访问发送者的本地存储。
+      // 时间用时间戳传递，跨时区打开也会倒数到同一个时刻。
+      try {
+        const share = new URLSearchParams(location.hash.slice(1));
+        const rawStamp = share.get('at');
+        const date = new Date(rawStamp && /^-?\d+$/.test(rawStamp) ? Number(rawStamp) : NaN);
+        const shared = {recipient: share.get('to'), message: share.get('wish'), customized: true,
+          birthday: `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}`};
+        if (validConfig(shared)) return shared;
+      } catch { /* 无效分享参数回退为本机设置。 */ }
+      try { const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)); if (validConfig(saved)) return saved; }
+      catch { /* 本地文件/隐私模式可能不允许存储，仍可正常运行。 */ }
+      return defaults();
+    }
+    function toast(message) {
+      clearTimeout(toastTimer); $('toast').textContent = message; $('toast').hidden = false;
+      toastTimer = setTimeout(() => $('toast').hidden = true, 3400);
+    }
+    function scatterConfetti() {
+      clearTimeout(confettiTimer); $('confetti').replaceChildren();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const colors = ['#ffb3d5', '#f4d396', '#c5b2ff', '#b6e0ff', '#fff2e3'];
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < 140; i++) {
+        const piece = document.createElement('i');
+        piece.style.setProperty('--x', Math.random() * 100 + '%');
+        piece.style.setProperty('--color', colors[i % colors.length]);
+        piece.style.setProperty('--duration', (3.5 + Math.random() * 2) + 's');
+        piece.style.setProperty('--delay', (Math.random() * 1.5) + 's');
+        piece.style.setProperty('--drift', (Math.random() * 260 - 130) + 'px');
+        piece.style.setProperty('--spin', (Math.random() * 700 + 360) + 'deg');
+        piece.style.setProperty('--w', (3 + Math.random() * 5) + 'px');
+        piece.style.setProperty('--h', (i % 3 === 0 ? 26 + Math.random() * 25 : 7 + Math.random() * 10) + 'px');
+        fragment.appendChild(piece);
+      }
+      $('confetti').appendChild(fragment);
+      confettiTimer = setTimeout(() => $('confetti').replaceChildren(), 7200);
+    }
+    function releaseBalloons() {
+      clearTimeout(balloonTimer); $('balloons').replaceChildren();
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      const colors = ['#e889bc', '#b99aff', '#eac49b', '#8dc4de', '#edb9c4'];
+      const fragment = document.createDocumentFragment();
+      for (let i = 0; i < 26; i++) {
+        const balloon = document.createElement('span'); balloon.className = 'balloon';
+        balloon.style.setProperty('--x', (i * 100 / 26 + Math.random() * 3) + '%');
+        balloon.style.setProperty('--balloon-color', colors[i % colors.length]);
+        balloon.style.setProperty('--size', (32 + Math.random() * 28) + 'px');
+        balloon.style.setProperty('--duration', (5 + Math.random() * 3) + 's');
+        balloon.style.setProperty('--delay', (Math.random() * 1.4) + 's');
+        balloon.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+        fragment.appendChild(balloon);
+      }
+      $('balloons').appendChild(fragment);
+      balloonTimer = setTimeout(() => $('balloons').replaceChildren(), 9600);
+    }
+    function startParty() {
+      scatterConfetti(); releaseBalloons();
+    }
+    function setCandles(isBlown) {
+      blown = isBlown;
+      $('cake-button').classList.toggle('blown', blown);
+      $('cake-button').setAttribute('aria-label', blown ? '重新点亮蜡烛' : '点击蛋糕，吹灭蜡烛许个愿');
+      $('cake-title').textContent = blown ? '粉笔画的双层生日蛋糕，蜡烛已熄灭' : '粉笔画的双层生日蛋糕，五支蜡烛正在闪烁';
+      $('wish-hint').textContent = blown ? '愿望已收好，愿它慢慢成真。再点一下，点亮蜡烛。' : '轻轻点击蛋糕，许一个愿吧。';
+    }
+    function showWish() {
+      const wishes = [config.message, ...EXTRA_WISHES];
+      $('wish-copy').textContent = wishes[wishIndex % wishes.length];
+    }
+    function enterCelebration() {
+      if (celebrating) return;
+      celebrating = true;
+      $('board').classList.add('celebrating');
+      $('headline').replaceChildren(document.createTextNode('给' + config.recipient + '，'), document.createElement('br'));
+      const highlight = document.createElement('span'); highlight.className = 'emphasis'; highlight.textContent = BIRTHDAY_AGE ? BIRTHDAY_AGE + '岁生日快乐' : '生日快乐';
+      $('headline').appendChild(highlight);
+      $('description').replaceChildren(document.createTextNode('愿你乘着风，去看更大的世界。'), document.createElement('br'), document.createTextNode('所有美好，都在向今天的你奔来。'));
+      $('countdown-caption').textContent = '愿每一秒，都靠近一点快乐';
+      $('party-button').textContent = '再来一次生日派对 ✧';
+      wishIndex = 0; showWish();
+      if (!preview) toast('生日快乐，愿你今天闪闪发光！');
+    }
+    function tick() {
+      const remaining = BirthdayClock.remaining(BirthdayClock.parseLocal(config.birthday), Date.now());
+      ['days', 'hours', 'minutes', 'seconds'].forEach(key => $(key).textContent = pad(preview ? 0 : remaining[key]));
+      if (remaining.done || preview) { clearInterval(tickTimer); enterCelebration(); }
+    }
+    function render() {
+      clearInterval(tickTimer); clearTimeout(confettiTimer); clearTimeout(balloonTimer); $('confetti').replaceChildren(); $('balloons').replaceChildren();
+      celebrating = false; wishIndex = 0; setCandles(false);
+      $('board').classList.remove('celebrating');
+      $('recipient').textContent = config.recipient;
+      document.title = `给${config.recipient} · 生日快乐`;
+      $('headline').replaceChildren(document.createTextNode('给' + config.recipient + '，'), document.createElement('br'));
+      const emphasis = document.createElement('span'); emphasis.className = 'emphasis'; emphasis.textContent = BIRTHDAY_AGE ? BIRTHDAY_AGE + '岁生日快乐' : '生日快乐'; $('headline').appendChild(emphasis);
+      $('description').replaceChildren(document.createTextNode('把期待写进星河，把温柔藏进每一秒。'), document.createElement('br'), document.createTextNode('有一个值得庆祝的日子，正在向你走来。'));
+      $('countdown-caption').textContent = '距离这个特别的日子，还有';
+      $('party-button').textContent = '点我，开启生日派对 ✧';
+      const date = new Date(BirthdayClock.parseLocal(config.birthday));
+      $('target-time').dateTime = config.birthday;
+      $('target-time').textContent = `${date.getFullYear()} / ${pad(date.getMonth() + 1)} / ${pad(date.getDate())} · ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+      $('sample-note').textContent = '示例日期 · 可在源码 DEFAULT_CONFIG 中修改';
+      showWish(); tick();
+      if (!celebrating) tickTimer = setInterval(tick, 250);
+    }
+    $('party-button').addEventListener('click', () => {
+      startParty();
+      toast('派对开始啦，愿今天的快乐一直延续 ✦');
+    });
+    let wishTimer;
+    $('cake-button').addEventListener('click', () => {
+      if (!blown) {
+        setCandles(true);
+        $('cake-button').classList.add('wish-revealed');
+        $('wish-pop').hidden = false;
+        clearTimeout(wishTimer);
+        wishTimer = setTimeout(() => { $('wish-pop').hidden = true; $('cake-button').classList.remove('wish-revealed'); }, 1800);
+        toast('愿望已被星星收好 ✦');
+      } else {
+        setCandles(false);
+        $('wish-pop').hidden = true;
+        $('cake-button').classList.remove('wish-revealed');
+        toast('蜡烛重新点亮，再许一个愿吧。');
+      }
+    });
+    $('next-wish').addEventListener('click', () => { wishIndex++; showWish(); });
+    $('share-button').addEventListener('click', () => {
+      if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.|\[::1\])/.test(location.hostname)) {
+        toast('这是本地预览。发布到公开网址后，就可以生成微信分享链接。'); return;
+      }
+      const url = new URL(location.href);
+      url.search = '';
+      url.hash = new URLSearchParams({to: config.recipient, at: String(BirthdayClock.parseLocal(config.birthday)), wish: config.message}).toString();
+      $('share-link').value = url.href; $('copy-status').textContent = '';
+      $('share-dialog').showModal();
+    });
+    $('close-share').addEventListener('click', () => $('share-dialog').close());
+    $('copy-link').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText($('share-link').value);
+        $('copy-status').textContent = '已复制，可以去微信粘贴。';
+      } catch {
+        $('share-link').focus(); $('share-link').select();
+        $('copy-status').textContent = '请长按或按 Ctrl+C 复制。';
+      }
+    });
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) tick(); });
+    config = readConfig(); render();
+  </script>
+</body>
+</html>
