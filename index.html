@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#190f2c">
-  <meta name="description" content="给张奕然，一份写进星空的生日祝福。">
-  <title>给张奕然 · 生日快乐</title>
+  <meta name="description" content="张奕然的生日祝福，写进星空。">
+  <title>张奕然 · 生日快乐</title>
   <style>
     :root{color-scheme:dark;--board:#243c34;--chalk:#f3ecda;--muted:#b8c4b3;--pink:#edb6af;--yellow:#eada9f;--line:rgba(239,235,215,.23);--hand:"STKaiti","KaiTi","楷体","Kaiti SC",serif;--sans:"Microsoft YaHei","PingFang SC",sans-serif}
     *{box-sizing:border-box}body{margin:0;background:#1a2e27;color:var(--chalk);font-family:var(--sans);font-size:14px}button,input,textarea{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--yellow);outline-offset:5px}button{color:inherit}button:disabled{cursor:default}[hidden]{display:none!important}
@@ -81,7 +81,9 @@ main { grid-template-columns: 1.03fr .97fr; gap: clamp(24px, 5vw, 72px); padding
 .eyebrow { color: #cfb9e4; letter-spacing: 3.5px; font-size: 9px; }
 .to { color: var(--pink); }
 .to::before { background: linear-gradient(90deg, transparent, var(--pink)); }
-.recipient { font-family: var(--sans); font-size: 17px; letter-spacing: 1px; }
+.to { font-size: clamp(22px, 4vw, 34px); gap: 16px; margin-bottom: 24px; }
+.to small { font-size: 15px; letter-spacing: 2px; }
+.recipient { font-family: var(--sans); font-size: clamp(30px, 6vw, 52px); font-weight: 700; letter-spacing: 2px; text-shadow: 0 0 24px rgba(255, 179, 213, .45); }
 h1 { color: #fff7fc; font-family: Georgia, "Times New Roman", "Songti SC", serif; font-weight: 400; font-size: clamp(37px, 4.8vw, 66px); letter-spacing: .5px; line-height: 1.25; text-shadow: 0 0 28px rgba(241, 160, 207, .22); }
 .emphasis { color: var(--pink); text-shadow: 0 0 20px rgba(242, 166, 201, .5); }
 .emphasis::after { height: 3px; bottom: -8px; border: 0; background: linear-gradient(90deg, transparent, var(--yellow), transparent); opacity: .8; }
@@ -204,7 +206,7 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
       <section class="intro" aria-labelledby="headline">
         <p class="eyebrow">A LITTLE BIRTHDAY MOMENT · JUST FOR YOU</p>
         <div class="to"><small>TO</small><span id="recipient" class="recipient">张奕然</span></div>
-        <h1 id="headline">给张奕然，<br><span class="emphasis">16岁生日快乐</span></h1>
+        <h1 id="headline"><span class="emphasis">16岁生日快乐</span></h1>
         <p class="description" id="description">把期待写在黑板上，把温柔藏进每一秒。<br>有一个特别的日子，值得认真等待。</p>
 
         <div class="countdown-wrap">
@@ -334,7 +336,7 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
     const BIRTHDAY_AGE = 16;
     const DEFAULT_CONFIG = {
       recipient: '张奕然',
-      birthday: '',
+      birthday: '2026-09-15T00:00',
       message: '张奕然，愿你被晚风拥抱，被星星照亮。十六岁继续做喜欢的事，去见想见的人，热烈又自在地生活。'
     };
     const EXTRA_WISHES = [
@@ -344,7 +346,7 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
       '愿蛋糕是甜的，日子是暖的，身边都是爱你的人。',
       '愿你长大一岁，也继续保有小朋友的快乐。'
     ];
-    const STORAGE_KEY = 'birthday-yiran-16-v1';
+    const STORAGE_KEY = 'birthday-yiran-16-v2';
     const $ = id => document.getElementById(id);
     const pad = number => String(number).padStart(2, '0');
     let config, preview = false, celebrating = false, blown = false;
@@ -437,7 +439,7 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
       if (celebrating) return;
       celebrating = true;
       $('board').classList.add('celebrating');
-      $('headline').replaceChildren(document.createTextNode('给' + config.recipient + '，'), document.createElement('br'));
+      $('headline').replaceChildren();
       const highlight = document.createElement('span'); highlight.className = 'emphasis'; highlight.textContent = BIRTHDAY_AGE ? BIRTHDAY_AGE + '岁生日快乐' : '生日快乐';
       $('headline').appendChild(highlight);
       $('description').replaceChildren(document.createTextNode('愿你乘着风，去看更大的世界。'), document.createElement('br'), document.createTextNode('所有美好，都在向今天的你奔来。'));
@@ -456,8 +458,8 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
       celebrating = false; wishIndex = 0; setCandles(false);
       $('board').classList.remove('celebrating');
       $('recipient').textContent = config.recipient;
-      document.title = `给${config.recipient} · 生日快乐`;
-      $('headline').replaceChildren(document.createTextNode('给' + config.recipient + '，'), document.createElement('br'));
+      document.title = `${config.recipient} · 生日快乐`;
+      $('headline').replaceChildren();
       const emphasis = document.createElement('span'); emphasis.className = 'emphasis'; emphasis.textContent = BIRTHDAY_AGE ? BIRTHDAY_AGE + '岁生日快乐' : '生日快乐'; $('headline').appendChild(emphasis);
       $('description').replaceChildren(document.createTextNode('把期待写进星河，把温柔藏进每一秒。'), document.createElement('br'), document.createTextNode('有一个值得庆祝的日子，正在向你走来。'));
       $('countdown-caption').textContent = '距离这个特别的日子，还有';
@@ -465,7 +467,7 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
       const date = new Date(BirthdayClock.parseLocal(config.birthday));
       $('target-time').dateTime = config.birthday;
       $('target-time').textContent = `${date.getFullYear()} / ${pad(date.getMonth() + 1)} / ${pad(date.getDate())} · ${pad(date.getHours())}:${pad(date.getMinutes())}`;
-      $('sample-note').textContent = '示例日期 · 可在源码 DEFAULT_CONFIG 中修改';
+      $('sample-note').textContent = '今天是你的生日 · 祝你快乐 ✦';
       showWish(); tick();
       if (!celebrating) tickTimer = setInterval(tick, 250);
     }
@@ -515,5 +517,7 @@ input, textarea { color: var(--chalk); background: #160d29; border-color: rgba(2
   </script>
 </body>
 </html>
+
+
 
 
